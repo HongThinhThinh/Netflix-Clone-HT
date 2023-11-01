@@ -7,9 +7,10 @@ import { auth } from "./firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout, selectUser } from "./features/counter/userSlice";
 function App() {
+  console.log("select User:" + selectUser);
   const user = useSelector(selectUser);
+  console.log(user);
   const dispatch = useDispatch();
-
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((userAuth) => {
       if (userAuth) {

@@ -1,5 +1,5 @@
 const API_KEY = "20511c7a0307a220750380e437afab73";
-console.log("vô tới đây r nhen");
+console.log("vô request.js  r nhen");
 
 const requests = {
   fetchTrending: `/trending/all/week?api_key=${API_KEY}&language=en-US`,
