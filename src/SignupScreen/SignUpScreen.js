@@ -1,6 +1,8 @@
 import React, { useRef } from "react";
 import "./SignUpScreen.scss";
 import { auth } from "../firebase";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -17,10 +19,10 @@ function SignUpScreen() {
       passwordRef.current.value
     )
       .then((authUser) => {
-        console.log(authUser);
+        toast(authUser);
       })
       .catch((error) => {
-        alert(error.message);
+        toast.error(error.message);
       });
   };
   const signIn = (e) => {
@@ -31,27 +33,29 @@ function SignUpScreen() {
       passwordRef.current.value
     )
       .then((authUser) => {
-        console.log(authUser);
+        toast.info(authUser);
       })
-      .catch((err) => alert(err.message));
+      .catch((err) => toast.error(err.message));
   };
   return (
-    <div className="SignUpScreen">
-      <div className="form-wrap">
-        <form>
-          <h1>Sign In</h1>
-          <input ref={emailRef} placeholder="Email" type="email" />
-          <input ref={passwordRef} placeholder="Password" type="password" />
-          <button onClick={signIn}>Sign In</button>
-          <h4>
-            <span className="gray">New to NetFlix? </span>
-            <span onClick={register} className="link">
-              SignUp Now
-            </span>
-          </h4>
-        </form>
+    <>
+      <div className="SignUpScreen">
+        <div className="form-wrap">
+          <form>
+            <h1>Sign In</h1>
+            <input ref={emailRef} placeholder="Email" type="email" />
+            <input ref={passwordRef} placeholder="Password" type="password" />
+            <button onClick={signIn}>Sign In</button>
+            <h4>
+              <span className="gray">New to NetFlix? </span>
+              <span onClick={register} className="link">
+                SignUp Now
+              </span>
+            </h4>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

@@ -22,6 +22,7 @@ function Row({ title, fetchURL, isLarge = false }) {
       <div className="row_posters">
         {movies.map((movies) => (
           <img
+            onClick={(e) => console.log(e.target)}
             className={`row_poster ${isLarge && "row_posterLage"}`}
             key={movies.id}
             src={`${base_url}${

@@ -5,6 +5,7 @@ import { store } from "./app/store";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
+import { ToastContainer } from "react-toastify";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -12,6 +13,20 @@ const root = createRoot(container);
 root.render(
   <Provider store={store}>
     <App />
+    <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+    />
+    {/* Same as */}
+    <ToastContainer />
   </Provider>
 );
 
