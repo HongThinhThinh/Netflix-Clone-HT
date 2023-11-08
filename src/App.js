@@ -7,6 +7,7 @@ import { auth } from "./firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout, selectUser } from "./features/counter/userSlice";
 import ProfileScreen from "./Component/ProfileScreen/ProfileScreen";
+import Detail from "./Component/Detail/Detail";
 function App() {
   const user = useSelector(selectUser);
   console.log(user);
@@ -21,7 +22,6 @@ function App() {
             email: userAuth.email,
           })
         );
-        console.log(userAuth);
       } else {
         //logout
         dispatch(logout());
@@ -41,6 +41,11 @@ function App() {
               exact
               path="/profile"
               element={<ProfileScreen></ProfileScreen>}
+            ></Route>
+            <Route
+              exact
+              path="/details/:movieId"
+              element={<Detail></Detail>}
             ></Route>
           </Routes>
         )}

@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
+.details {
+  background-position: center;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  z-index: -1;
+  &__content {
+    height: 100vh;
+    overflow-y: scroll;
+    color: white;
+    background-color: rgb(24, 24, 24);
+    z-index: 2;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    img {
+      width: 100%;
+      height: 400px;
+    }
+    .details__title {
+      position: absolute;
+      top: 20%;
+      font-family: "Shadows Into Light", cursive;
+      color: white;
+      font-size: 46px;
+      font-weight: 800;
+      margin-left: 20px;
+    }
+    button {
+      cursor: pointer;
+      top: 30%;
+      margin-left: 25px;
+      position: absolute;
+      outline: none;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      border-radius: 4px;
+      .title {
+        // color: white;
+        margin-left: 2px;
+        font-weight: bold;
+      }
+    }
+    &--des {
+      display: flex;
+      padding: 20px;
+      &-left {
+        width: 65%;
+        text-align: justify;
+        margin-right: 5%;
+        .wrap_rating {
+          margin-bottom: 10px;
+          display: flex;
+          align-items: center;
+          .rating {
+            color: rgb(101, 210, 98);
+            margin-right: 6px;
+          }
+          .tagLine {
+            color: rgb(177, 177, 177);
+          }
+        }
+      }
+      &-right {
+        width: 30%;
+        .genres {
+          font-size: 14px;
+        }
+      }
+    }
+    .cast {
+      margin-bottom: 13px;
+      span:first-child {
+        opacity: 0.3;
+      }
+    }
+    .genres {
+      margin-bottom: 13px;
+      span:first-child {
+        opacity: 0.3;
+      }
+    }
+    .release_date {
+      margin-bottom: 13px;
+      span:first-child {
+        opacity: 0.3;
+      }
+    }
+  }
+}
+
+.filter-details {
+  position: fixed; /* Sit on top of the page content */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(18, 16, 16, 0.7);
+  backdrop-filter: brightness(60%);
+}

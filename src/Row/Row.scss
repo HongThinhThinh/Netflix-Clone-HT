@@ -1,6 +1,7 @@
 .row {
   color: white;
   margin-left: 20px;
+  cursor: pointer;
   &_posters {
     display: flex;
     overflow-y: hidden;
@@ -29,5 +30,40 @@
   &:hover {
     transform: scale(1.09);
     opacity: 1;
+  }
+}
+
+.row_related {
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0 6px;
+  .wrap-row_related {
+    width: 30%;
+    background-color: rgb(47, 47, 47);
+    margin-right: 20px;
+    padding: 0;
+    height: 270px;
+    overflow: hidden;
+    margin-top: 20px;
+    .row_related_img {
+      display: block;
+      width: 100%;
+      height: fit-content;
+    }
+  }
+}
+.related-info {
+  padding: 10px;
+  h6 {
+    opacity: 0.6;
+
+    &:first-child {
+      color: rgb(121, 248, 118);
+      margin-bottom: 1px;
+      font-size: 12px;
+    }
   }
 }
