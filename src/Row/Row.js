@@ -10,16 +10,21 @@ function Row({ title, fetchURL, isLarge = false, isRalate, data }) {
   }
   const base_url = "https://image.tmdb.org/t/p/original";
   useEffect(() => {
-    async function fetchData() {
-      const request = await Axios.get(fetchURL);
-      setMovies(request.data.results);
-      console.log(request.data);
-      return request;
-    }
     fetchData();
   }, [fetchURL]);
 
+  const fetchData = async () => {
+    try {
+      const request = await Axios.get(fetchURL);
+      setMovies(request.data.results);
+      return request;
+    } catch (e) {
+      navigate("/");
+    }
+  };
   const generate = (movies) => {
+    const imagePath = isLarge ? movies.poster_path : movies.backdrop_path;
+    if (!imagePath) return;
     const a = (
       <>
         <img
@@ -30,20 +35,25 @@ function Row({ title, fetchURL, isLarge = false, isRalate, data }) {
             isRalate && "row_related_img"
           } `}
           key={movies.id}
-          src={`${base_url}${
-            isLarge ? movies.poster_path : movies.backdrop_path
-          }`}
+          src={`${base_url}${imagePath}`}
           alt={movies.name}
         />
         <div className="related-info">
-          {isRalate ? <h6>{movies.release_date}</h6> : ""}
+          {isRalate ? <h6> {movies.title}</h6> : ""}
           {isRalate ? <h6> {truncate(movies?.overview, 240)}</h6> : ""}
         </div>
       </>
     );
 
     if (isRalate) {
-      return <div className={`${isRalate ? "wrap-row_related" : ""}`}>{a}</div>;
+      return (
+        <div
+          className={`${isRalate ? "wrap-row_related" : ""}`}
+          key={movies.id}
+        >
+          {a}
+        </div>
+      );
     } else {
       return a;
     }

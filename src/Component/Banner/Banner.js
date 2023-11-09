@@ -2,36 +2,24 @@ import React, { useEffect, useState } from "react";
 import "./Banner.scss";
 import requests from "../../request";
 import Axios from "../../axios";
+import { useNavigate } from "react-router";
 function Banner() {
+  const navigate = useNavigate();
   const [movie, setMovie] = useState([]);
-  //   useEffect(() => {
-  //     console.log("giowf moi vo useEffect ne");
-  //     const fetchData = async () => {
-  //       console.log("vo fetchData r nhen");
-  //       const response = await Axios.get(requests.fetchNetflixOriginals);
-  //       console.log("data cua response ne : " + response.data);
-  //       const movie =
-  //         response.data.results[
-  //           Math.floor(Math.random() * response.data.results.length)
-  //         ];
-  //       setMovie(movie);
-  //     };
-  //     console.log("đang trên hàm fetch Dâta chuẩn bị vô");
-  //     fetchData();
-  //   }, []);
   useEffect(() => {
     fetchData();
   }, []);
-
   const fetchData = async () => {
-    let response = await Axios.get(requests.fetchNetflixOriginals);
-    console.log(response.data);
-    const movie =
-      response.data.results[
-        Math.floor(Math.random() * response.data.results.length)
-      ];
-
-    setMovie(movie);
+    try {
+      let response = await Axios.get(requests.fetchTopRated);
+      const movie =
+        response.data.results[
+          Math.floor(Math.random() * response.data.results.length)
+        ];
+      setMovie(movie);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   function truncate(string, n) {
@@ -55,7 +43,13 @@ function Banner() {
         </div>
 
         <div className="banner__buttons">
-          <button>Play</button>
+          <button
+            onClick={(e) => {
+              movie.id ? navigate(`/details/${movie.id}`) : navigate("/");
+            }}
+          >
+            Play
+          </button>
           <button>My List</button>
         </div>
         <div className="banner__description">

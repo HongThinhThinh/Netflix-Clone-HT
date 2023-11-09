@@ -10,7 +10,6 @@ import ProfileScreen from "./Component/ProfileScreen/ProfileScreen";
 import Detail from "./Component/Detail/Detail";
 function App() {
   const user = useSelector(selectUser);
-  console.log(user);
   const dispatch = useDispatch();
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((userAuth) => {
