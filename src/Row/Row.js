@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import "./Row.scss";
 import Axios from "../axios";
 import { useNavigate } from "react-router";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 function Row({ title, fetchURL, isLarge = false, isRalate, data }) {
   const [movies, setMovies] = useState([]);
   const navigate = useNavigate();
@@ -22,16 +25,17 @@ function Row({ title, fetchURL, isLarge = false, isRalate, data }) {
       navigate("/");
     }
   };
+
   const generate = (movies) => {
-    const imagePath = isLarge ? movies.poster_path : movies.backdrop_path;
+    const imagePath = isLarge ? movies.backdrop_path : movies.poster_path;
     if (!imagePath) return;
     const a = (
-      <>
+      <div key={movies.id}>
         <img
           onClick={(e) => {
             navigate(`/details/${movies.id}`);
           }}
-          className={`row_poster ${isLarge && "row_posterLage"} ${
+          className={`row_poster ${isLarge && "row_posterLarge"} ${
             isRalate && "row_related_img"
           } `}
           key={movies.id}
@@ -42,7 +46,7 @@ function Row({ title, fetchURL, isLarge = false, isRalate, data }) {
           {isRalate ? <h6> {movies.title}</h6> : ""}
           {isRalate ? <h6> {truncate(movies?.overview, 240)}</h6> : ""}
         </div>
-      </>
+      </div>
     );
 
     if (isRalate) {
@@ -58,12 +62,26 @@ function Row({ title, fetchURL, isLarge = false, isRalate, data }) {
       return a;
     }
   };
-
+  const settings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 10,
+    slidesToScroll: 6,
+    // autoplay: true,
+    speed: 1000,
+    autoplaySpeed: 5000,
+  };
   return (
     <div className="row">
       <h2>{title}</h2>
       <div className={`row_posters ${isRalate && "row_related"}`}>
-        {movies.map((movies) => generate(movies))}
+        {!isRalate ? (
+          <Slider {...settings}>
+            {movies.map((movie) => generate(movie))}
+          </Slider>
+        ) : (
+          movies.map((movie) => generate(movie))
+        )}
       </div>
     </div>
   );

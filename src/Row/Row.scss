@@ -3,14 +3,13 @@
   margin-left: 20px;
   cursor: pointer;
   &_posters {
-    display: flex;
     overflow-y: hidden;
     overflow-x: scroll;
     padding: 22px;
     .row_poster {
+      display: block;
       max-height: 190px;
       object-fit: contain;
-      margin-right: 10px;
       transition: transform 450ms;
       width: 100%;
       &:hover {
@@ -64,6 +63,16 @@
       color: rgb(121, 248, 118);
       margin-bottom: 1px;
       font-size: 12px;
+    }
+  }
+}
+.slick-list {
+  height: 150px;
+  .slick-track {
+    .slick-slide {
+      div {
+        margin-right: 9px;
+      }
     }
   }
 }
