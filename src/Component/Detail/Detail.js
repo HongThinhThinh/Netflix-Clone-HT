@@ -18,8 +18,7 @@ function Detail() {
     location.pathname.split("/")[location.pathname.split("/").length - 1];
   useEffect(() => {
     getApi();
-
-    setTimeout(() => setLoading(true), 100);
+    setTimeout(() => setLoading(true), 150);
     return () => {};
   }, [id]);
 
@@ -62,8 +61,10 @@ function Detail() {
             }}
           >
             <div className="details__content">
-              <img src={`${base_url}${movies.backdrop_path}`} alt="img" />
-              <h3 className="details__title">{movies.title}</h3>
+              <div className="details_top">
+                <img src={`${base_url}${movies.backdrop_path}`} alt="img" />
+                <h3 className="details__title">{movies.title}</h3>
+              </div>
               <button onClick={playTrailer}>
                 <span>
                   <FaPlay />

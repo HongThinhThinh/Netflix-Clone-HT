@@ -65,11 +65,37 @@ function Row({ title, fetchURL, isLarge = false, isRalate, data }) {
   const settings = {
     dots: true,
     infinite: true,
-    slidesToShow: 10,
+    slidesToShow: 9,
     slidesToScroll: 6,
-    // autoplay: true,
-    speed: 1000,
-    autoplaySpeed: 5000,
+    autoplay: true,
+    speed: 2000,
+    autoplaySpeed: 3000,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
   return (
     <div className="row">

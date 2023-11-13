@@ -42,6 +42,10 @@ function Banner() {
           </h1>
         </div>
 
+        <div className="banner__description">
+          {truncate(movie?.overview, 170)}
+        </div>
+
         <div className="banner__buttons">
           <button
             onClick={(e) => {
@@ -52,10 +56,8 @@ function Banner() {
           </button>
           <button>My List</button>
         </div>
-        <div className="banner__description">
-          {truncate(movie?.overview, 170)}
-        </div>
       </div>
+
       <div className="banner__fade"></div>
     </header>
   );

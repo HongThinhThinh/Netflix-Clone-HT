@@ -6,7 +6,10 @@
   &__contents {
     margin-left: 30px;
     padding-top: 140px;
-    width: 400px;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
   }
 
   &__title {
@@ -55,6 +58,17 @@
     #242323
   );
 }
-.wrap_h1 {
-  width: max-content;
+
+@media only screen and (max-width: 600px) {
+  .banner {
+    &__content {
+      margin: 0 auto;
+    }
+    &__title {
+      font-size: 2rem;
+    }
+    &__buttons {
+      margin: 0 auto;
+    }
+  }
 }
