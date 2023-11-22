@@ -12,8 +12,10 @@ function Row({ title, fetchURL, isLarge = false, isRalate, data }) {
     return string?.length > n ? string.substr(0, n - 1) + "..." : string;
   }
   const base_url = "https://image.tmdb.org/t/p/original";
+
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchURL]);
 
   const fetchData = async () => {
@@ -31,17 +33,19 @@ function Row({ title, fetchURL, isLarge = false, isRalate, data }) {
     if (!imagePath) return;
     const a = (
       <div key={movies.id}>
-        <img
-          onClick={(e) => {
-            navigate(`/details/${movies.id}`);
-          }}
-          className={`row_poster ${isLarge && "row_posterLarge"} ${
-            isRalate && "row_related_img"
-          } `}
-          key={movies.id}
-          src={`${base_url}${imagePath}`}
-          alt={movies.name}
-        />
+        {imagePath && (
+          <img
+            onClick={(e) => {
+              navigate(`/details/${movies.id}`);
+            }}
+            className={`row_poster ${isLarge && "row_posterLarge"} ${
+              isRalate && "row_related_img"
+            } `}
+            key={movies.id}
+            src={`${base_url}${imagePath}`}
+            alt={movies.name}
+          />
+        )}
         <div className="related-info">
           {isRalate ? <h6> {movies.title}</h6> : ""}
           {isRalate ? <h6> {truncate(movies?.overview, 240)}</h6> : ""}

@@ -6,6 +6,7 @@ import Nav from "../Nav/Nav";
 import { FaPlay } from "react-icons/fa";
 import Trailer from "../Trailer/Trailer";
 import RelateMovies from "../RelateMovies/RelateMovies";
+import Loading from "../Loading/Loading";
 function Detail() {
   const [loading, setLoading] = useState(false);
   const [movies, setMovies] = useState([]);
@@ -49,6 +50,9 @@ function Detail() {
   const handleShowChange = (newShow) => {
     setShow(newShow);
   };
+  if (!movies.poster_path) {
+    return <Loading />;
+  }
   return (
     <>
       {loading && (

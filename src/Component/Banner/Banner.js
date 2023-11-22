@@ -26,6 +26,10 @@ function Banner() {
     return string?.length > n ? string.substr(0, n - 1) + "..." : string;
   }
 
+  if (!movie?.backdrop_path) {
+    return <h1>loading...</h1>;
+  }
+
   return (
     <header
       className="banner"

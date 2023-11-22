@@ -3,11 +3,12 @@ import "./App.css";
 import HomeScreen from "./Component/HomeScreen/HomeScreen";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginScreen from "./LoginScreen/LoginScreen";
-import { auth } from "./firebase";
+import { auth, getFireBaseData } from "./firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout, selectUser } from "./features/counter/userSlice";
 import ProfileScreen from "./Component/ProfileScreen/ProfileScreen";
 import Detail from "./Component/Detail/Detail";
+import SignUpPage from "./Component/SignUpPage/SignUpPage";
 function App() {
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
@@ -15,12 +16,16 @@ function App() {
     const unsubscribe = auth.onAuthStateChanged((userAuth) => {
       if (userAuth) {
         //login
-        dispatch(
-          login({
-            uid: userAuth.uid,
-            email: userAuth.email,
-          })
-        );
+        getFireBaseData(userAuth.uid).then((data) => {
+          dispatch(
+            login({
+              uid: userAuth.uid,
+              email: userAuth.email,
+              phoneNumber: data.phoneNumber,
+              userName: data.username,
+            })
+          );
+        });
       } else {
         //logout
         dispatch(logout());
@@ -28,26 +33,27 @@ function App() {
     });
     return unsubscribe;
   }, [dispatch]);
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
   return (
     <div className="app">
       <Router>
-        {!user ? (
-          <LoginScreen />
-        ) : (
-          <Routes>
-            <Route exact path="/" element={<HomeScreen></HomeScreen>}></Route>
-            <Route
-              exact
-              path="/profile"
-              element={<ProfileScreen></ProfileScreen>}
-            ></Route>
-            <Route
-              exact
-              path="/details/:movieId"
-              element={<Detail></Detail>}
-            ></Route>
-          </Routes>
-        )}
+        <Routes>
+          {user && (
+            <>
+              <Route path="/" element={<HomeScreen />} />
+
+              <Route path="/profile" element={<ProfileScreen />} />
+
+              <Route path="/details/:movieId" element={<Detail />} />
+            </>
+          )}
+          <Route path="/" element={<LoginScreen />} />
+          <Route path="/signUpPage" element={<SignUpPage />} />
+        </Routes>
       </Router>
     </div>
   );

@@ -25,6 +25,7 @@ function Nav() {
           <img
             onClick={() => navigate("/")}
             className="nav__logo"
+            style={{ cursor: "pointer" }}
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/1200px-Netflix_2015_logo.svg.png"
             alt=""
           />

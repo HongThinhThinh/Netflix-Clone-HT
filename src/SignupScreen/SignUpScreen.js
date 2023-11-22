@@ -3,28 +3,12 @@ import "./SignUpScreen.scss";
 import { auth } from "../firebase";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-
-function SignUpScreen() {
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router";
+function SignInScreen() {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-  const register = (e) => {
-    e.preventDefault();
-    createUserWithEmailAndPassword(
-      auth,
-      emailRef.current.value,
-      passwordRef.current.value
-    )
-      .then((authUser) => {
-        toast(authUser);
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
-  };
+
   const signIn = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(
@@ -37,6 +21,7 @@ function SignUpScreen() {
       })
       .catch((err) => toast.error(err.message));
   };
+  const navigate = useNavigate();
   return (
     <>
       <div className="SignUpScreen">
@@ -48,7 +33,7 @@ function SignUpScreen() {
             <button onClick={signIn}>Sign In</button>
             <h4>
               <span className="gray">New to NetFlix? </span>
-              <span onClick={register} className="link">
+              <span onClick={() => navigate("/signUpPage")} className="link">
                 SignUp Now
               </span>
             </h4>
@@ -59,4 +44,4 @@ function SignUpScreen() {
   );
 }
 
-export default SignUpScreen;
+export default SignInScreen;

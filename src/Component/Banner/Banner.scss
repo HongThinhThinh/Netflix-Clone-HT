@@ -66,6 +66,10 @@
     }
     &__title {
       font-size: 2rem;
+      text-align: center !important;
+    }
+    &__description {
+      text-align: center;
     }
     &__buttons {
       margin: 0 auto;
