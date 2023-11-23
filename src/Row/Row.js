@@ -5,8 +5,6 @@ import { useNavigate } from "react-router";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import LazyLoad from "react-lazyload";
-import { Skeleton } from "antd";
 function Row({ title, fetchURL, isLarge = false, isRalate, data }) {
   const [movies, setMovies] = useState([]);
   const navigate = useNavigate();
