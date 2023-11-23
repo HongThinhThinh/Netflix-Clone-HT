@@ -7,6 +7,7 @@ import { auth } from "../../firebase";
 import { useNavigate } from "react-router";
 function ProfileScreen() {
   const user = useSelector(selectUser);
+  console.log(user);
   const nav = useNavigate();
   return (
     <div className="profile-screen">

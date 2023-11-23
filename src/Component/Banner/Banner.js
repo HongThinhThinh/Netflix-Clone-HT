@@ -3,6 +3,7 @@ import "./Banner.scss";
 import requests from "../../request";
 import Axios from "../../axios";
 import { useNavigate } from "react-router";
+import { Skeleton } from "antd";
 function Banner() {
   const navigate = useNavigate();
   const [movie, setMovie] = useState([]);
@@ -27,7 +28,7 @@ function Banner() {
   }
 
   if (!movie?.backdrop_path) {
-    return <h1>loading...</h1>;
+    return <Skeleton active />;
   }
 
   return (

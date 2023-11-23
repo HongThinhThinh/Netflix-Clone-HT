@@ -14,18 +14,35 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((userAuth) => {
+      console.log(userAuth);
       if (userAuth) {
-        //login
-        getFireBaseData(userAuth.uid).then((data) => {
-          dispatch(
-            login({
-              uid: userAuth.uid,
-              email: userAuth.email,
-              phoneNumber: data.phoneNumber,
-              userName: data.username,
-            })
-          );
-        });
+        try {
+          //login
+          console.log("userAuth");
+          console.log(userAuth);
+          getFireBaseData(userAuth.uid).then((data) => {
+            console.log("data ne");
+            console.log(data);
+            if (data) {
+              dispatch(
+                login({
+                  uid: userAuth.uid,
+                  email: userAuth.email,
+                  phoneNumber: data.phoneNumber,
+                  userName: data.username,
+                })
+              );
+              console.log({
+                uid: userAuth.uid,
+                email: userAuth.email,
+                phoneNumber: data.phoneNumber,
+                userName: data.username,
+              });
+            }
+          });
+        } catch (e) {
+          console.log(e);
+        }
       } else {
         //logout
         dispatch(logout());

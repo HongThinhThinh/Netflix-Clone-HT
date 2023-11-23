@@ -6,6 +6,8 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 
 import "./SignUpPage.scss";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { login } from "../../features/counter/userSlice";
 
 function SignUpPage() {
   const emailRef = useRef(null);
@@ -13,22 +15,32 @@ function SignUpPage() {
   const userName = useRef(null);
   const PhoneNumber = useRef(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const register = async (e) => {
     e.preventDefault();
+    let authUser;
     try {
-      const authUser = await createUserWithEmailAndPassword(
+      authUser = await createUserWithEmailAndPassword(
         auth,
         emailRef.current.value,
         passwordRef.current.value
       );
       if (authUser) {
         console.log(authUser);
-        writeUserData(
+        const response = await writeUserData(
           authUser.user.uid,
           userName.current.value,
           emailRef.current.value,
           PhoneNumber.current.value
+        );
+        dispatch(
+          login({
+            uid: authUser.user.uid,
+            email: authUser.user.email,
+            phoneNumber: response.phoneNumber,
+            userName: response.username,
+          })
         );
         navigate("/");
       }
@@ -58,7 +70,7 @@ function SignUpPage() {
               <input ref={PhoneNumber} placeholder="Phone Number" type="text" />
               <button onClick={register}>Sign Up </button>
               <h4>
-                <span className="gray">New to NetFlix? </span>
+                <span className="gray">New to Netflix? </span>
                 <span
                   onClick={() =>
                     (window.location.href =

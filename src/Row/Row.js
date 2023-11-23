@@ -5,6 +5,8 @@ import { useNavigate } from "react-router";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import LazyLoad from "react-lazyload";
+import { Skeleton } from "antd";
 function Row({ title, fetchURL, isLarge = false, isRalate, data }) {
   const [movies, setMovies] = useState([]);
   const navigate = useNavigate();
@@ -32,6 +34,7 @@ function Row({ title, fetchURL, isLarge = false, isRalate, data }) {
     const imagePath = isLarge ? movies.backdrop_path : movies.poster_path;
     if (!imagePath) return;
     const a = (
+      // <LazyLoad height={100} offset={300} placeholder={<Skeleton active />}>
       <div key={movies.id}>
         {imagePath && (
           <img
@@ -51,6 +54,7 @@ function Row({ title, fetchURL, isLarge = false, isRalate, data }) {
           {isRalate ? <h6> {truncate(movies?.overview, 240)}</h6> : ""}
         </div>
       </div>
+      // </LazyLoad>
     );
 
     if (isRalate) {
@@ -71,7 +75,7 @@ function Row({ title, fetchURL, isLarge = false, isRalate, data }) {
     infinite: true,
     slidesToShow: 9,
     slidesToScroll: 6,
-    autoplay: true,
+    // autoplay: true,
     speed: 2000,
     autoplaySpeed: 3000,
     responsive: [
@@ -103,8 +107,9 @@ function Row({ title, fetchURL, isLarge = false, isRalate, data }) {
   };
   return (
     <div className="row">
-      <h2>{title}</h2>
+      <h2 className="row__title">{title}</h2>
       <div className={`row_posters ${isRalate && "row_related"}`}>
+        {/* <LazyLoad height={200} offset={100} placeholder={<div>Loading...</div>}> */}
         {!isRalate ? (
           <Slider {...settings}>
             {movies.map((movie) => generate(movie))}
@@ -112,6 +117,7 @@ function Row({ title, fetchURL, isLarge = false, isRalate, data }) {
         ) : (
           movies.map((movie) => generate(movie))
         )}
+        {/* </LazyLoad> */}
       </div>
     </div>
   );

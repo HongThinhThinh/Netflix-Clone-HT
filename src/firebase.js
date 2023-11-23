@@ -19,20 +19,22 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
-export function writeUserData(userId, name, email, phoneNumber) {
+export async function writeUserData(userId, name, email, phoneNumber) {
   const db = getDatabase();
-  set(ref(db, "user/" + userId), {
-    id: userId,
-    username: name,
-    email: email,
-    phoneNumber: phoneNumber,
-  })
-    .then(() => {
-      console.log("sc");
-    })
-    .catch((error) => {
-      console.log(error);
+  try {
+    const response = await set(ref(db, "user/" + userId), {
+      id: userId,
+      username: name,
+      email: email,
+      phoneNumber: phoneNumber,
     });
+    return {
+      id: userId,
+      username: name,
+      email: email,
+      phoneNumber: phoneNumber,
+    };
+  } catch (e) {}
 }
 
 // const dbRef = ref(getDatabase());
