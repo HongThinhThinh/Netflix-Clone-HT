@@ -75,8 +75,8 @@ function Row({ title, fetchURL, isLarge = false, isRalate, data }) {
     infinite: true,
     slidesToShow: 9,
     slidesToScroll: 6,
-    // autoplay: true,
-    speed: 2000,
+    autoplay: true,
+    speed: 4000,
     autoplaySpeed: 3000,
     responsive: [
       {
