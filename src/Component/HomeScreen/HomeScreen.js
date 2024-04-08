@@ -6,6 +6,7 @@ import requests from "../../request";
 import React, { Suspense } from "react";
 import { Skeleton } from "antd";
 const Row = React.lazy(() => import("../../Row/Row"));
+
 function HomeScreen() {
   return (
     <div className="homeScreen">
